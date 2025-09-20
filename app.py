@@ -32,21 +32,21 @@ if st.button("Check"):
         st.success(f"{day} Completed, Well done ({days_left} more days to claim your 1st reward!)")
 
         quotes = {
-            "Day 1": "🚀 Every journey begins with a single step. Keep going!",
-            "Day 2": "🌱 Small progress each day adds up to big results.",
-            "Day 3": "🔥 Consistency beats motivation. You're doing great!",
-            "Day 4": "💡 Believe in yourself and all that you are.",
-            "Day 5": "🌟 Keep pushing, your future self will thank you.",
-            "Day 6": "💪 Strength grows in the moments when you think you can't go on but you keep going anyway.",
-            "Day 7": "🎯 Stay focused and never give up on your goals.",
-            "Day 8": "🌈 Every day is a new opportunity to grow.",
-            "Day 9": "🔥 Passion and perseverance are your best allies.",
-            "Day 10": "🌟 Celebrate every small victory along the way.",
-            "Day 11": "🚀 Keep the momentum going, success is near.",
-            "Day 12": "💡 Your dedication is inspiring, keep it up!",
-            "Day 13": "🌱 Growth takes time, be patient and persistent.",
-            "Day 14": "🎉 Almost there! Your hard work is paying off.",
-            "Day 15": "🏆 Congratulations! You've earned your reward and more."
+            "Day 1": "🍥 'A lesson in chasing your dream: If you don't take risks, you can't create a future!' – Monkey D. Luffy",
+            "Day 2": "🏴‍☠️ 'It’s not the face that makes someone a monster, it’s the choices they make with their lives.' – Naruto Uzumaki",
+            "Day 3": "🔥 'Fear is not evil. It tells you what your weakness is, and once you know your weakness, you can become stronger as well as kinder.' – Gildarts (Fairy Tail)",
+            "Day 4": "💡 'No matter how deep the night, it always turns to day.' – Brook (One Piece)",
+            "Day 5": "🌟 'A lesson without pain is meaningless… That’s because you can’t gain something without sacrificing something in return.' – Edward Elric",
+            "Day 6": "💪 'When you give up, your dreams and everything else, they’re gone.' – Naruto Uzumaki",
+            "Day 7": "🎯 'A person becomes strong when they have someone they want to protect.' – Haku (Naruto)",
+            "Day 8": "🌈 'When do you think people die? When they are forgotten.' – Dr. Hiriluk (One Piece)",
+            "Day 9": "🔥 'To know sorrow is not terrifying. What is terrifying is to know you can’t go back to happiness you could have.' – Matsumoto Rangiku (Bleach)",
+            "Day 10": "🌟 'Power comes in response to a need, not a desire. You have to create that need.' – Goku",
+            "Day 11": "🚀 'You should enjoy the little detours. To the fullest. Because that’s where you’ll find the things more important than what you want.' – Ging Freecss",
+            "Day 12": "💡 'A lesson without struggle teaches nothing. Embrace the challenge, and grow from it.' – Inspired by various anime",
+            "Day 13": "🌱 'If you don’t take risks, you can’t create a future.' – Monkey D. Luffy",
+            "Day 14": "🎉 'Hard work is worthless for those that don’t believe in themselves.' – Naruto Uzumaki",
+            "Day 15": "🏆 'Inherited will, the swelling of the changing times, and the dreams of people… These are things that cannot be stopped.' – Gol D. Roger"
         }
 
         if day in quotes:
