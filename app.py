@@ -16,7 +16,7 @@ if st.button("Check"):
         '20101': ("Day 4", 11),
         '10210': ("Day 5", 10),
         '10140': ("Day 6", 9),
-        '13010': ("Day 7", 8),
+        '13010': ("Day 7", 8), 
         '10160': ("Day 8", 7),
         '10510': ("Day 9", 6),
         '10410': ("Day 10", 5),
@@ -30,6 +30,27 @@ if st.button("Check"):
     if num in rewards:
         day, days_left = rewards[num]
         st.success(f"{day} Completed, Well done ({days_left} more days to claim your 1st reward!)")
+
+        quotes = {
+            "Day 1": "🚀 Every journey begins with a single step. Keep going!",
+            "Day 2": "🌱 Small progress each day adds up to big results.",
+            "Day 3": "🔥 Consistency beats motivation. You're doing great!",
+            "Day 4": "💡 Believe in yourself and all that you are.",
+            "Day 5": "🌟 Keep pushing, your future self will thank you.",
+            "Day 6": "💪 Strength grows in the moments when you think you can't go on but you keep going anyway.",
+            "Day 7": "🎯 Stay focused and never give up on your goals.",
+            "Day 8": "🌈 Every day is a new opportunity to grow.",
+            "Day 9": "🔥 Passion and perseverance are your best allies.",
+            "Day 10": "🌟 Celebrate every small victory along the way.",
+            "Day 11": "🚀 Keep the momentum going, success is near.",
+            "Day 12": "💡 Your dedication is inspiring, keep it up!",
+            "Day 13": "🌱 Growth takes time, be patient and persistent.",
+            "Day 14": "🎉 Almost there! Your hard work is paying off.",
+            "Day 15": "🏆 Congratulations! You've earned your reward and more."
+        }
+
+        if day in quotes:
+            st.info(quotes[day])
 
         # Progress bar with label and conditional styling
         progress = (15 - days_left) / 15
