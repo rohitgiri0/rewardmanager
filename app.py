@@ -1,73 +1,104 @@
 import streamlit as st
+from datetime import datetime
 
-st.title("📚 Streak and Reward Manager")
+st.set_page_config(page_title="Streak & Spark — 10-day Tracker", layout="wide")
 
-# initialize session state
+st.title("✨ Streak & Spark — 10 Day Challenge")
+st.markdown("_Enter the secret code for today's streak to unlock a micro-boost and move closer to your reward!_")
+
+# --- session state ---
 if "valid_code" not in st.session_state:
     st.session_state.valid_code = False
+if "last_unlocked" not in st.session_state:
+    st.session_state.last_unlocked = None
 
-num = st.text_input("Enter Latest code").strip().lower()
+# --- input ---
+num = st.text_input("Enter today's code", placeholder="e.g. X101").strip()
 
-if st.button("Check"):
-    rewards = {
-        '1010': ("Day 1", 14),
-        '1100': ("Day 2", 13),
-        '1110': ("Day 3", 12),
-        '20101': ("Day 4", 11),
-        '10210': ("Day 5", 10),
-        '10140': ("Day 6", 9),
-        '13010': ("Day 7", 8), 
-        '10160': ("Day 8", 7),
-        '10510': ("Day 9", 6),
-        '10410': ("Day 10", 5),
-        '10710': ("Day 11", 4),
-        '1410': ("Day 12", 3),
-        '10180': ("Day 13", 2),
-       '10519': ("Day 14", 1),
-        '1015550': ("Day 15", 0)
-    }
+codes = {
+    'X101': ("Day 1", 9),
+    'A2B2': ("Day 2", 8),
+    'C3D3': ("Day 3", 7),
+    'D4E4': ("Day 4", 6),
+    'E5F5': ("Day 5", 5),
+    'F6G6': ("Day 6", 4),
+    'G7H7': ("Day 7", 3),
+    'H8I8': ("Day 8", 2),
+    'I9J9': ("Day 9", 1),
+    'J10K': ("Day 10", 0),
+}
 
-    if num in rewards:
-        day, days_left = rewards[num]
-        st.success(f"{day} Completed, Well done ({days_left} more days to claim your 1st reward!)")
+quotes = {
+    "Day 1": "Starting is the hardest part — everyone notices the results, few remember the morning you showed up.",
+    "Day 2": "Progress is messy. You’ll fail more times than you win; that’s the only path to getting better.",
+    "Day 3": "Most people quit right before their breakthrough. Keep showing up when it hurts.",
+    "Day 4": "Pain is honest — it points to what needs fixing. Don’t avoid it; learn from it.",
+    "Day 5": "Halfway means you’ve invested enough to refuse giving up. Keep clearing the debt of effort.",
+    "Day 6": "Comfort steals potential. Discomfort is the currency that buys a new life.",
+    "Day 7": "Real work is lonely at times. Let the silence sharpen you, not stop you.",
+    "Day 8": "No one owes you ease. Build what you want by choosing hard things and finishing them.",
+    "Day 9": "Doubt gets loudest when success is closest. Move anyway — action drowns the noise.",
+    "Day 10": "Finishing proves this truth: discipline outlasts feeling. Rewards follow those who endure."
+}
 
-        quotes = {
-            "Day 1": "🍥 'A lesson in chasing your dream: If you don't take risks, you can't create a future!' – Monkey D. Luffy",
-            "Day 2": "🏴‍☠️ 'It’s not the face that makes someone a monster, it’s the choices they make with their lives.' – Naruto Uzumaki",
-            "Day 3": "🔥 'Fear is not evil. It tells you what your weakness is, and once you know your weakness, you can become stronger as well as kinder.' – Gildarts (Fairy Tail)",
-            "Day 4": "💡 'No matter how deep the night, it always turns to day.' – Brook (One Piece)",
-            "Day 5": "🌟 'A lesson without pain is meaningless… That’s because you can’t gain something without sacrificing something in return.' – Edward Elric",
-            "Day 6": "💪 'When you give up, your dreams and everything else, they’re gone.' – Naruto Uzumaki",
-            "Day 7": "🎯 'A person becomes strong when they have someone they want to protect.' – Haku (Naruto)",
-            "Day 8": "🌈 'When do you think people die? When they are forgotten.' – Dr. Hiriluk (One Piece)",
-            "Day 9": "🔥 'To know sorrow is not terrifying. What is terrifying is to know you can’t go back to happiness you could have.' – Matsumoto Rangiku (Bleach)",
-            "Day 10": "🌟 'Power comes in response to a need, not a desire. You have to create that need.' – Goku",
-            "Day 11": "🚀 'You should enjoy the little detours. To the fullest. Because that’s where you’ll find the things more important than what you want.' – Ging Freecss",
-            "Day 12": "💡 'A lesson without struggle teaches nothing. Embrace the challenge, and grow from it.' – Inspired by various anime",
-            "Day 13": "🌱 'If you don’t take risks, you can’t create a future.' – Monkey D. Luffy",
-            "Day 14": "🎉 'Hard work is worthless for those that don’t believe in themselves.' – Naruto Uzumaki",
-            "Day 15": "🏆 'Inherited will, the swelling of the changing times, and the dreams of people… These are things that cannot be stopped.' – Gol D. Roger"
-        }
-
-        if day in quotes:
-            st.info(quotes[day])
-
-        # Progress bar with label and conditional styling
-        progress = (15 - days_left) / 15
-        # st.markdown(f"**Day {15 - days_left} of 15**")
-        st.progress(progress, text=f"Progress: {15 - days_left} / 15 days")
-        if progress < 0.5:
-            st.warning(f"Keep going! You're {(progress*100):.0f}% done.")
-        else:
-            st.info(f"Great job! You're {(progress*100):.0f}% done.")
-        # store valid code in session
+# --- main logic ---
+if st.button("Check Code"):
+    if not num:
+        st.error("Please enter a code first.")
+    elif num in codes:
+        day, days_left = codes[num]
         st.session_state.valid_code = (days_left == 0)
+        st.session_state.last_unlocked = {"day": day, "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+        # header area
+        left, right = st.columns([3,2])
+        with left:
+            st.success(f"{day} Completed — Well done! 🌟")
+            st.write(quotes.get(day, "Nice work — keep the streak alive!"))
+            # fun progress display
+            progress_value = int((int(day.split()[-1]) / 10) * 100)
+            st.progress(progress_value / 100.0, text=f"{progress_value}% — {day} of 10")
+
+        with right:
+            st.metric("Days left to reward", f"{days_left}")
+            st.write("**Last Completed:**")
+            st.write(f"{st.session_state.last_unlocked['time']}")
+
+        # subtle encouragement
+        if days_left > 5:
+            st.info("Nice start — keep the rhythm going! 🔥")
+        elif days_left > 1:
+            st.info("Sweet — you're in the sprint now. Finish strong! 💪")
+        elif days_left == 1:
+            st.info("One more day to claim your reward — don't stop! 🏁")
+        else:
+            st.balloons()
+            st.success("Amazing! You've completed 10 days — claim your reward below 🎁")
+
     else:
-        st.error("❌ Sorry, the code is not valid")
+        st.error("❌ Invalid code. Double-check and try again.")
         st.session_state.valid_code = False
 
-# Show claim reward button if last code was valid
+# show claim UI if reward is ready
+st.divider()
 if st.session_state.valid_code:
-    if st.button("🎁 Claim Reward"):
-        st.success("send '🥳' this on whatsapp to know more abt Sarparaijj")
-        st.session_state.valid_code = False  # reset after claiming
+    st.markdown("### 🎉 Ready to claim your reward")
+    if st.button("Claim Reward"):
+        st.success("Claim received — send '🥳' on WhatsApp to confirm claim")
+        st.balloons()
+        st.session_state.valid_code = False
+# else:
+    # st.info("Tip: ")
+
+# footer: show tracker overview
+st.divider()
+cols = st.columns(5)
+for i, (code_key, (day_label, days_left)) in enumerate(codes.items()):
+    idx = i % 5
+    with cols[idx]:
+        unlocked = (st.session_state.last_unlocked and st.session_state.last_unlocked['day'] == day_label)
+        emoji = "✅" if unlocked else "◻️"
+        st.write(f"{emoji} **{day_label}**")
+        # st.caption(f"code: `{code_key}`")
+
+# st.markdown("_Made with 🙊_")
