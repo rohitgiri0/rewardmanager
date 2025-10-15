@@ -18,14 +18,14 @@ num = st.text_input("Enter today's code", placeholder="e.g. X101").strip()
 codes = {
     'X101': ("Day 1", 9),
     'A2B2': ("Day 2", 8),
-    'C3D3': ("Day 3", 7),
-    'D4E4': ("Day 4", 6),
-    'E5F5': ("Day 5", 5),
-    'F6G6': ("Day 6", 4),
-    'G7H7': ("Day 7", 3),
-    'H8I8': ("Day 8", 2),
-    'I9J9': ("Day 9", 1),
-    'J10K': ("Day 10", 0),
+    'PANI': ("Day 3", 7),
+    'PURI': ("Day 4", 6),
+    'KHAYEgi': ("Day 5", 5),
+    '😃': ("Day 6", 4),
+    'areyy': ("Day 7", 3),
+    'Ooo': ("Day 8", 2),
+    'Dimpalwaa': ("Day 9", 1),
+    'tanik hasiyee tohhhh': ("Day 10", 0),
 }
 
 quotes = {
